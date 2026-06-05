@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Foundation: `.github/pull_request_template.md` (summary, type-of-change checklist, affected surface, testing checklist, spec/traceability, risks, related).
 - Foundation: `CONTRIBUTING.md` (AgilePlus spec mandate, dotnet build command, kebab-case branch conventions, Conventional Commits, PR expectations with explicit backward-compatible public-API rule).
 - Docs: tighten `README.md` license claim from "Apache-2.0 OR MIT" to MIT-only (org `LICENSE` is MIT).
+- Docs: `README.md` "License" section now reflects the actual state — no `LICENSE` file has been committed, the link to `./LICENSE` is a dead reference. Replaced the false link with an honest statement of intent (MIT) plus a clear note that the file is missing and needs to land before the first public release. The previous text introduced in 47c38d6 asserted a `LICENSE` file exists at the repo root; it does not.
 - Docs: fix `CLAUDE.md` "Key Files" entry that listed `src/LodManager.cs` — the actual file in `src/` is `src/TerrainLod.cs`.
 - Foundation: `CODE_OF_CONDUCT.md` (full Contributor Covenant v2.1 mirroring the org root; the org's "Reporting" section points to KooshaPari on GitHub).
 - Foundation: `.github/ISSUE_TEMPLATE/config.yml` (disables blank issues, adds contact links for Security advisories, AgilePlus specs, and the Phenotype org so the private disclosure path is discoverable from the new-issue chooser).
