@@ -35,4 +35,5 @@ Add a `<ProjectReference>` in the consuming `.csproj`:
 
 ## License
 
-Apache-2.0 OR MIT, consistent with Phenotype org defaults.
+MIT, consistent with the Phenotype org default. See [`LICENSE`](./LICENSE) — the
+file is in the repository root.

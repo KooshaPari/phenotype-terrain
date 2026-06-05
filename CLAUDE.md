@@ -25,7 +25,7 @@ Unity consumers add the project as a sibling project reference; rebuild after pu
 - `phenotype-terrain.csproj` — Project file (Microsoft.NET.Sdk)
 - `src/HeightField.cs` — Per-tile elevation data and world-space Y queries
 - `src/ChunkMeshBuilder.cs` — Unity Mesh generation from height-field chunks
-- `src/LodManager.cs` — Camera-distance LOD tiers (if present)
+- `src/TerrainLod.cs` — Camera-distance LOD selection for terrain chunks
 - `README.md` — Usage and structure documentation
 - `AGENTS.md` — Local agent governance (canonical for working conventions)
 - `CONTRIBUTING.md` — Contributor guide (AgilePlus mandate, branch conventions, PR expectations)
