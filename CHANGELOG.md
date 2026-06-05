@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Foundation: `SECURITY.md` (private disclosure via GitHub Security Advisories, response targets).
 - Foundation: `CODEOWNERS` (default reviewer: `@KooshaPari`).
 - Foundation: `.github/workflows/dotnet-build.yml` (Ubuntu, .NET 8, `dotnet build -c Release`, with a no-op stub for the Unity reference under `$(WorldBoxManaged)`).
-- Foundation: `.github/dependabot.yml` (weekly updates for `github-actions` and `nuget`, 5-PR limit).
+- Foundation: `.github/dependabot.yml` (weekly updates for `github-actions`, 5-PR limit; `nuget` intentionally not enabled — see the YAML comment for the rationale and re-enable condition).
 - Foundation: `.github/ISSUE_TEMPLATE/bug_report.md` and `feature_request.md`.
 - Foundation: `.github/pull_request_template.md` (summary, type-of-change checklist, affected surface, testing checklist, spec/traceability, risks, related).
 - Foundation: `CONTRIBUTING.md` (AgilePlus spec mandate, dotnet build command, kebab-case branch conventions, Conventional Commits, PR expectations with explicit backward-compatible public-API rule).
