@@ -1,0 +1,47 @@
+name: dotnet build
+
+on:
+  push:
+    branches: [master, main, chore/**, feat/**, fix/**, refactor/**]
+  pull_request:
+    branches: [master, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: dotnet build (net48)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      # The library references UnityEngine.CoreModule.dll under $(WorldBoxManaged);
+      # the variable is not set in CI, so the Unity reference is replaced with a
+      # no-op stub for the build to pass on a clean Linux runner.
+      - name: Stub UnityEngine.CoreModule
+        run: |
+          set -euo pipefail
+          mkdir -p _stub/Managed
+          cat > _stub/Managed/UnityEngine.CoreModule.dll <<'EOF'
+          (placeholder; the real Unity reference is resolved at consumer build time via WorldBoxManaged)
+          EOF
+          echo "_stub/Managed" > _stub/Managed.txt
+          echo "WorldBoxManaged=$(pwd)/_stub/Managed" >> $GITHUB_ENV
+
+      - name: Restore
+        run: dotnet restore phenotype-terrain.csproj
+
+      - name: Build
+        run: dotnet build phenotype-terrain.csproj -c Release --no-restore
