@@ -1,3 +1,5 @@
+> 📋 Read [`CONTRIBUTING.md`](./CONTRIBUTING.md) and [`AGENTS.md`](./AGENTS.md) before opening this PR. Non-trivial features require a linked AgilePlus spec.
+
 ## Summary
 
 <!-- What does this PR do? -->
