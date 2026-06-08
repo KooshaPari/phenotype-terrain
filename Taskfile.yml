@@ -1,31 +1,37 @@
-version: '3'
+version: "3"
+
+vars:
+  PROJECT: phenotype-terrain
+  DOTNET_VERSION: "8.0"
 
 tasks:
-  default:
-    desc: List tasks
-    cmds: [task --list]
-
   build:
-    desc: Build the .NET project
+    desc: "Build with Unity stub"
     cmds:
-      - dotnet build phenotype-terrain.csproj -c Release
+      - dotnet build {{.PROJECT}}.csproj --configuration Release
 
   test:
-    desc: Run tests (requires Unity reference)
+    desc: "Run tests"
     cmds:
-      - dotnet test tests/phenotype-terrain.tests.csproj -c Release
+      - echo "No tests yet — add tests/ project and uncomment this task"
+
+  format:
+    desc: "Check C# formatting"
+    cmds:
+      - dotnet format --verify-no-changes --verbosity diagnostic
+
+  format-fix:
+    desc: "Auto-fix C# formatting"
+    cmds:
+      - dotnet format --verbosity diagnostic
 
   lint:
-    desc: Run dotnet format
+    desc: "Run dotnet format as lint"
     cmds:
-      - dotnet format --verify-no-changes
+      - task: format
 
-  fmt:
-    desc: Format code
+  default:
+    desc: "Run the full quality gate (build, lint)"
     cmds:
-      - dotnet format
-
-  clean:
-    desc: Remove build artifacts
-    cmds:
-      - rm -rf bin/ obj/
+      - task: build
+      - task: lint
