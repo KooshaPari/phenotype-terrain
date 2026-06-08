@@ -1,5 +1,14 @@
 # phenotype-terrain
 
+## State
+
+Progress: `[██░░░░░░░░] 20%` — shared terrain mesh infrastructure (scaffold).
+
+_Updated 2026-06-08 — audit pass._
+
+[![CI](https://github.com/KooshaPari/phenotype-terrain/actions/workflows/ci.yml/badge.svg)](https://github.com/KooshaPari/phenotype-terrain/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
 Shared terrain mesh infrastructure for Phenotype-org mods targeting Unity/WorldBox.
 
 This package extracts reusable terrain concerns — height-field storage, chunk mesh
@@ -43,3 +52,25 @@ package is "All rights reserved" by default under copyright law. The
 package owner should commit an MIT `LICENSE` file at the repo root
 before the first public release, and consumers should treat the
 absence of the file as a red flag.
+
+## Description
+
+Shared terrain mesh infrastructure for Phenotype-org mods targeting Unity / WorldBox — height-field storage, chunk mesh generation, and camera-distance LOD selection, packaged as a sibling-project reference.
+
+## Install
+
+Reference the project from a consuming `.csproj`:
+
+```xml
+<ProjectReference Include="../phenotype-terrain/phenotype-terrain.csproj" />
+```
+
+Set the `WorldBoxManaged` MSBuild property before building (see below).
+
+## Usage
+
+Build: `$env:WorldBoxManaged = "..."; dotnet build phenotype-terrain.csproj -c Release`. Use `HeightField` for elevation queries, `ChunkMeshBuilder` for Unity `Mesh` generation, `TerrainLod` for camera-distance selection.
+
+## Contributing
+
+PRs welcome. See `CONTRIBUTING.md`. Keep the `net48` / `$(WorldBoxManaged)` contract stable so sibling mods don't break.
