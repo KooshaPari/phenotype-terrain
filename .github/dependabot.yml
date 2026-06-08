@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+  # Note: the `nuget` ecosystem is intentionally NOT enabled. The
+  # `phenotype-terrain.csproj` declares zero `<PackageReference>` items
+  # (it only references the local `UnityEngine.CoreModule.dll` via
+  # `<Reference>`), so there are no NuGet dependencies for dependabot
+  # to surface. `.gitignore` excludes `bin/` and `obj/`, so
+  # `obj/project.assets.json` is not committed either. Re-enable here
+  # once a NuGet dependency is added.
