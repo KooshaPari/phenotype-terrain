@@ -7,18 +7,50 @@ namespace Phenotype.Terrain
     /// Holds the output of a mesh build operation: vertices, triangle indices,
     /// UV coordinates and per-vertex normals.
     /// </summary>
+    /// <remarks>
+    /// All arrays are parallel: the element at index <c>i</c> in <see cref="Vertices"/>
+    /// corresponds to the same vertex in <see cref="UVs"/> and <see cref="Normals"/>.
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// var builder = new ChunkMeshBuilder();
+    /// MeshData mesh = builder.BuildMesh(16, 1.0f);
+    ///
+    /// // Upload to Unity
+    /// var unityMesh = new Mesh();
+    /// unityMesh.vertices = mesh.Vertices;
+    /// unityMesh.triangles = mesh.Indices;
+    /// unityMesh.uv = mesh.UVs;
+    /// unityMesh.normals = mesh.Normals;
+    /// </code>
+    /// </example>
     public class MeshData
     {
-        /// <summary>Vertex positions in world space.</summary>
+        /// <summary>
+        /// Vertex positions in world space.
+        /// </summary>
+        /// <remarks>The length equals the total number of vertices in the mesh.</remarks>
         public Vector3[] Vertices { get; set; }
 
-        /// <summary>Triangle index buffer (3 indices per triangle).</summary>
+        /// <summary>
+        /// Triangle index buffer (3 indices per triangle).
+        /// </summary>
+        /// <remarks>
+        /// Each consecutive group of 3 integers defines one triangle in clockwise winding order
+        /// when viewed from above (positive Y).
+        /// </remarks>
         public int[] Indices { get; set; }
 
-        /// <summary>UV coordinates for each vertex.</summary>
+        /// <summary>
+        /// UV coordinates for each vertex.
+        /// </summary>
+        /// <remarks>U and V range from 0 to 1 across the chunk.</remarks>
         public Vector2[] UVs { get; set; }
 
-        /// <summary>Per-vertex normals.</summary>
+        /// <summary>
+        /// Per-vertex normals.
+        /// </summary>
+        /// <remarks>For flat meshes this defaults to <c>Vector3.up</c>.</remarks>
         public Vector3[] Normals { get; set; }
     }
 
@@ -26,6 +58,25 @@ namespace Phenotype.Terrain
     /// Generates Unity Mesh objects for terrain chunks from height-field data.
     /// Handles vertex layout, triangle winding, UV mapping, and normals.
     /// </summary>
+    /// <remarks>
+    /// <para>Two overloads are provided:</para>
+    /// <list type="bullet">
+    /// <item><description><see cref="BuildMesh(int, float)"/> produces a flat grid at Y = 0.</description></item>
+    /// <item><description><see cref="BuildMesh(HeightField, int, float)"/> samples elevation from a <see cref="HeightField"/>.</description></item>
+    /// </list>
+    /// </remarks>
+    /// <example>
+    /// <code>
+    /// var builder = new ChunkMeshBuilder();
+    ///
+    /// // Flat 16x16 grid, 100 units wide
+    /// MeshData flat = builder.BuildMesh(16, 100f);
+    ///
+    /// // Height-mapped grid
+    /// var heightField = new HeightField(17, 17);
+    /// MeshData terrain = builder.BuildMesh(heightField, 16, 100f);
+    /// </code>
+    /// </example>
     public class ChunkMeshBuilder
     {
         /// <summary>
@@ -36,6 +87,15 @@ namespace Phenotype.Terrain
         /// <param name="size">World-space size of the chunk. Default is 1.</param>
         /// <returns>A <see cref="MeshData"/> containing the generated mesh.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when resolution is &lt;= 0.</exception>
+        /// <example>
+        /// <code>
+        /// var builder = new ChunkMeshBuilder();
+        /// MeshData mesh = builder.BuildMesh(32, 200f);
+        ///
+        /// // mesh.Vertices.Length == (32 + 1) * (32 + 1) == 1089
+        /// // mesh.Indices.Length == 32 * 32 * 2 * 3 == 6144
+        /// </code>
+        /// </example>
         public MeshData BuildMesh(int resolution, float size = 1f)
         {
             if (resolution <= 0)
@@ -105,6 +165,17 @@ namespace Phenotype.Terrain
         /// <param name="size">World-space size of the chunk. Default is 1.</param>
         /// <returns>A <see cref="MeshData"/> containing the generated mesh.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when resolution is &lt;= 0.</exception>
+        /// <example>
+        /// <code>
+        /// var heightField = new HeightField(33, 33);
+        /// for (int x = 0; x &lt; 33; x++)
+        ///     for (int z = 0; z &lt; 33; z++)
+        ///         heightField.SetHeight(x, z, Mathf.Sin(x * 0.1f) * 10f);
+        ///
+        /// var builder = new ChunkMeshBuilder();
+        /// MeshData mesh = builder.BuildMesh(heightField, 32, 100f);
+        /// </code>
+        /// </example>
         public MeshData BuildMesh(HeightField heightField, int resolution, float size = 1f)
         {
             if (resolution <= 0)
