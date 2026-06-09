@@ -53,9 +53,9 @@ namespace Phenotype.Terrain
             if (distance < 0f)
                 throw new ArgumentOutOfRangeException(nameof(distance), "distance must be >= 0");
 
-            if (distance < NearDistance)   return LodTier.Near;
-            if (distance < MidDistance)    return LodTier.Mid;
-            if (distance < CullDistance)   return LodTier.Far;
+            if (distance < NearDistance) return LodTier.Near;
+            if (distance < MidDistance) return LodTier.Mid;
+            if (distance < CullDistance) return LodTier.Far;
             return LodTier.Culled;
         }
 
