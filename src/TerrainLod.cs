@@ -9,13 +9,13 @@ namespace Phenotype.Terrain
     public class TerrainLod : LodBase
     {
         /// <summary>Distance to <see cref="LodTier.Mid"/> transition. Default: 50.</summary>
-        public override float NearDistance { get; } = 50f;
+        public override float NearDistance { get; set; } = 50f;
 
         /// <summary>Distance to <see cref="LodTier.Far"/> transition. Default: 150.</summary>
-        public override float MidDistance { get; } = 150f;
+        public override float MidDistance { get; set; } = 150f;
 
         /// <summary>Distance to <see cref="LodTier.Culled"/> transition. Default: 400.</summary>
-        public override float CullDistance { get; } = 400f;
+        public override float CullDistance { get; set; } = 400f;
 
         /// <summary>Grid resolution used for the <see cref="LodTier.Near"/> tier. Default: 64.</summary>
         public int NearResolution { get; set; } = 64;

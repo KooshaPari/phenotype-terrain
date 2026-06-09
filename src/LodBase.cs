@@ -27,20 +27,20 @@ namespace Phenotype.Terrain
         /// Distance (in world units) at which the mesh transitions from
         /// <see cref="LodTier.Near"/> to <see cref="LodTier.Mid"/> quality.
         /// </summary>
-        public abstract float NearDistance { get; }
+        public abstract float NearDistance { get; set; }
 
         /// <summary>
         /// Distance (in world units) at which the mesh transitions from
         /// <see cref="LodTier.Mid"/> to <see cref="LodTier.Far"/> quality.
         /// </summary>
-        public abstract float MidDistance { get; }
+        public abstract float MidDistance { get; set; }
 
         /// <summary>
         /// Distance (in world units) at which the mesh transitions from
         /// <see cref="LodTier.Far"/> to <see cref="LodTier.Culled"/>.
         /// Geometry beyond this distance is not rendered.
         /// </summary>
-        public abstract float CullDistance { get; }
+        public abstract float CullDistance { get; set; }
 
         /// <summary>
         /// Returns the LOD tier appropriate for the given camera distance.
