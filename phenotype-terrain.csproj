@@ -8,6 +8,7 @@
     <AssemblyName>Phenotype.Terrain</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup Condition="Exists('$(WorldBoxManaged)/UnityEngine.CoreModule.dll')">
@@ -19,8 +20,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="_stub/**/*.cs" />
     <Compile Remove="tests/**/*.cs" />
     <Compile Remove="_stub/obj/**/*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="src/**/*.cs" />
+    <Compile Include="_stub/Color.cs" />
+    <Compile Include="_stub/Vector2.cs" />
+    <Compile Include="_stub/Vector3.cs" />
   </ItemGroup>
 
   <ItemGroup>
