@@ -16,7 +16,6 @@
       <HintPath>$(WorldBoxManaged)/UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Compile Remove="_stub/**/*.cs" />
-    <Compile Remove="_stub/obj/**/*.cs" />
   </ItemGroup>
 
   <ItemGroup>
