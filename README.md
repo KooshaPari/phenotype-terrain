@@ -6,7 +6,7 @@ Progress: `[██░░░░░░░░] 20%` — shared terrain mesh infrast
 
 _Updated 2026-06-08 — audit pass._
 
-[![CI](https://github.com/KooshaPari/phenotype-terrain/actions/workflows/ci.yml/badge.svg)](https://github.com/KooshaPari/phenotype-terrain/actions/workflows/ci.yml)
+[![CI](https://github.com/KooshaPari/phenotype-terrain/actions/workflows/dotnet-build.yml/badge.svg)](https://github.com/KooshaPari/phenotype-terrain/actions/workflows/dotnet-build.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 Shared terrain mesh infrastructure for Phenotype-org mods targeting Unity/WorldBox.
@@ -70,3 +70,4 @@ Build: `$env:WorldBoxManaged = "..."; dotnet build phenotype-terrain.csproj -c R
 
 PRs welcome. See `CONTRIBUTING.md`. Keep the `net48` / `$(WorldBoxManaged)` contract stable so sibling mods don't break.
 <!-- ci-refresh: 2026-06-10T07:21:45Z -->
+<!-- ci-refresh: 2026-06-11T09:26:41Z -->
