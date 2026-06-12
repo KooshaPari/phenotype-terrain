@@ -11,9 +11,19 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
-  <ItemGroup>
+  <PropertyGroup>
+    <UnityEngineFallbackDir>$(MSBuildThisFileDirectory)..\_stub\bin\$(Configuration)\net8.0\</UnityEngineFallbackDir>
+  </PropertyGroup>
+
+  <ItemGroup Condition="Exists('$(WorldBoxManaged)/UnityEngine.CoreModule.dll')">
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(WorldBoxManaged)/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition="!Exists('$(WorldBoxManaged)/UnityEngine.CoreModule.dll') And Exists('$(UnityEngineFallbackDir)UnityEngine.CoreModule.dll')">
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(UnityEngineFallbackDir)UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
 
